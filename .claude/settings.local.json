@@ -1,7 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "Read(//Users/mymac/**)"
+      "Read(//Users/mymac/**)",
+      "Bash(claude skill:*)",
+      "Bash(claude plugins:*)",
+      "WebFetch(domain:skills.sh)"
     ],
     "additionalDirectories": [
       "/Users/mymac/milad website "

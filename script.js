@@ -11,9 +11,3 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// CTA Button Click
-document.querySelector('.cta-button').addEventListener('click', function() {
-    document.querySelector('#contact').scrollIntoView({
-        behavior: 'smooth'
-    });
-});

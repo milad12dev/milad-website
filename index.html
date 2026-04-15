@@ -3,68 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Milad KI.engineering – KI Services & Automation</title>
+    <title>Milad KI.engineering – Automatisierung & Webservices</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
-            <h1 class="logo">Milad KI.engineering</h1>
+            <a href="index.html" class="logo">Milad <span class="ki">KI</span>.engineering</a>
             <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="services.html">Services</a></li>
+                <li><a href="#services">Services</a></li>
                 <li><a href="portfolio.html">Portfolio</a></li>
-                <li><a href="#contact">Kontakt</a></li>
+                <li><a href="mailto:mktrades004@gmail.com" class="nav-cta">Kontakt</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero -->
     <section id="home" class="hero">
         <div class="container">
-            <h2>KI-Automatisierungen & Webservices</h2>
-            <p>Ich baue Lösungen die dein Business skalieren. Websites, ChatBots, Automatisierungen – mit KI-Power.</p>
-            <button class="cta-button">Lass uns reden</button>
-        </div>
-    </section>
+            <div class="hero-inner">
+                <div class="hero-badge">
+                    <span class="hero-badge-dot"></span>
+                    KI-Automatisierung &amp; Webservices
+                </div>
 
-    <!-- Services Section -->
-    <section id="services" class="services">
-        <div class="container">
-            <h2>Meine Services</h2>
-            <div class="service-grid">
-                <div class="service-card">
-                    <h3>Website-Erstellung</h3>
-                    <p>Moderne, konvertierungsstarke Websites für dein Business. Schnell gebaut, optimal für Sales.</p>
-                    <a href="services.html" class="cta-button" style="margin-top:1.25rem">Details ansehen</a>
+                <h2>
+                    Systeme die<br>
+                    <span class="hi">arbeiten.</span><br>
+                    Du auch.
+                </h2>
+
+                <p>
+                    Websites, KI-Chatbots und Workflow-Automatisierungen –
+                    gebaut für messbare Ergebnisse. Kein Baukasten, kein Generisches.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="services.html" class="btn btn-primary">Services ansehen &rarr;</a>
+                    <a href="mailto:mktrades004@gmail.com" class="btn btn-ghost">Direkt schreiben</a>
                 </div>
-                <div class="service-card">
-                    <h3>KI ChatBot</h3>
-                    <p>Automatisierter Customer Support. Dein Bot antwortet 24/7 – du sparst Zeit und Kosten.</p>
-                    <a href="services.html" class="cta-button" style="margin-top:1.25rem">Details ansehen</a>
-                </div>
-                <div class="service-card">
-                    <h3>Automatisierungen</h3>
-                    <p>Repetitive Aufgaben automatisieren. Email, Daten, Workflows – KI übernimmt das.</p>
-                    <a href="services.html" class="cta-button" style="margin-top:1.25rem">Details ansehen</a>
+
+                <div class="hero-stats">
+                    <div>
+                        <div class="hero-stat-value">3+</div>
+                        <div class="hero-stat-label">Spezialisierte Services</div>
+                    </div>
+                    <div>
+                        <div class="hero-stat-value">&lt;10</div>
+                        <div class="hero-stat-label">Tage bis Go-Live</div>
+                    </div>
+                    <div>
+                        <div class="hero-stat-value">100%</div>
+                        <div class="hero-stat-label">Individuell entwickelt</div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Services -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="services-header">
+                <p class="section-label">Was ich baue</p>
+                <h2 class="section-title">Drei Services.<br>Ein Ziel.</h2>
+                <p class="section-sub">Jede Lösung ist auf deinen spezifischen Engpass zugeschnitten – nicht auf ein Template.</p>
+            </div>
+
+            <div class="service-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24">
+                            <rect x="2" y="3" width="20" height="14" rx="2"/>
+                            <path d="M8 21h8M12 17v4"/>
+                        </svg>
+                    </div>
+                    <h3>Website-Erstellung</h3>
+                    <p>Konvertierungsstarke Websites die dein Angebot klar kommunizieren. Mobil-optimiert, schnell, verkaufsbereit.</p>
+                    <a href="services.html" class="service-link">Details &amp; Preise &rarr;</a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                        </svg>
+                    </div>
+                    <h3>KI ChatBot</h3>
+                    <p>Dein Unternehmen antwortet 24/7. Der Bot kennt dein Angebot, qualifiziert Leads und spart bares Geld.</p>
+                    <a href="services.html" class="service-link">Details &amp; Preise &rarr;</a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </div>
+                    <h3>Automatisierungen</h3>
+                    <p>Repetitive Workflows automatisiert. Leads, E-Mails, Daten – einmal einrichten, dauerhaft Zeit sparen.</p>
+                    <a href="services.html" class="service-link">Details &amp; Preise &rarr;</a>
+                </div>
+            </div>
+
+            <div class="services-footer">
+                <a href="services.html" class="btn btn-ghost">Alle Services mit Preisen ansehen</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
     <section id="contact" class="contact">
         <div class="container">
-            <h2>Kontakt</h2>
-            <p>Interessiert? Schreib mir eine Nachricht.</p>
-            <a href="mailto:mktrades004@gmail.com" class="cta-button">Email schreiben</a>
+            <div class="contact-inner">
+                <p class="section-label">Kontakt</p>
+                <h2>Bereit anzufangen?</h2>
+                <p>Schreib mir kurz was du brauchst. Kein Formular, kein Funnel – direkt per E-Mail.</p>
+                <a href="mailto:mktrades004@gmail.com" class="btn btn-primary">mktrades004@gmail.com</a>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <p>&copy; 2026 Milad KI.engineering. Alle Rechte vorbehalten.</p>
+        <div class="container">
+            <p>&copy; 2026 Milad KI.engineering. Alle Rechte vorbehalten.</p>
+            <ul class="footer-links">
+                <li><a href="services.html">Services</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+            </ul>
+        </div>
     </footer>
 
     <script src="script.js"></script>

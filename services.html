@@ -4,204 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Services – Milad KI.engineering</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <style>
-        .page-hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 4rem 0;
-            text-align: center;
-        }
-        .page-hero h2 {
-            font-size: 2.5rem;
-            margin-bottom: 0.75rem;
-        }
-        .page-hero p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        .services-detail {
-            padding: 5rem 0;
-            background: #f9f9f9;
-        }
-        .service-block {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-            margin-bottom: 2.5rem;
-            overflow: hidden;
-            display: grid;
-            grid-template-columns: 1fr 340px;
-        }
-        .service-block:last-child {
-            margin-bottom: 0;
-        }
-        .service-content {
-            padding: 2.5rem 2.5rem 2.5rem 2.5rem;
-        }
-        .service-number {
-            font-size: 0.8rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: #667eea;
-            margin-bottom: 0.4rem;
-        }
-        .service-content h3 {
-            font-size: 1.7rem;
-            color: #1a1a1a;
-            margin-bottom: 0.75rem;
-        }
-        .service-content > p {
-            color: #555;
-            margin-bottom: 1.75rem;
-            font-size: 1.05rem;
-            line-height: 1.7;
-        }
-        .detail-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.25rem;
-            margin-bottom: 0;
-        }
-        .detail-item h4 {
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: #999;
-            margin-bottom: 0.35rem;
-        }
-        .detail-item p {
-            color: #333;
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-
-        .service-sidebar {
-            background: linear-gradient(160deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 2.5rem 2rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-        .price-label {
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            opacity: 0.75;
-            margin-bottom: 0.4rem;
-        }
-        .price-value {
-            font-size: 2rem;
-            font-weight: 800;
-            margin-bottom: 0.2rem;
-            line-height: 1.1;
-        }
-        .price-note {
-            font-size: 0.85rem;
-            opacity: 0.75;
-            margin-bottom: 2rem;
-        }
-        .service-sidebar .cta-button {
-            background: white;
-            color: #667eea;
-            font-weight: 700;
-            padding: 0.85rem 1.75rem;
-            width: 100%;
-        }
-        .service-sidebar .cta-button:hover {
-            background: #f0f0ff;
-        }
-
-        .includes-list {
-            list-style: none;
-            margin-top: 1.5rem;
-            text-align: left;
-            width: 100%;
-        }
-        .includes-list li {
-            padding: 0.3rem 0;
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-        .includes-list li::before {
-            content: "✓ ";
-            font-weight: 700;
-        }
-
-        .back-link-section {
-            padding: 2.5rem 0;
-            text-align: center;
-            background: #f9f9f9;
-            border-top: 1px solid #eee;
-        }
-        .back-link {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: color 0.3s;
-        }
-        .back-link:hover {
-            color: #764ba2;
-        }
-        .back-link::before {
-            content: "← ";
-        }
-
-        @media (max-width: 768px) {
-            .service-block {
-                grid-template-columns: 1fr;
-            }
-            .detail-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
 </head>
 <body>
+
     <nav class="navbar">
         <div class="container">
-            <h1 class="logo">Milad KI.engineering</h1>
+            <a href="index.html" class="logo">Milad <span class="ki">KI</span>.engineering</a>
             <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
                 <li><a href="services.html">Services</a></li>
                 <li><a href="portfolio.html">Portfolio</a></li>
-                <li><a href="index.html#contact">Kontakt</a></li>
+                <li><a href="mailto:mktrades004@gmail.com" class="nav-cta">Kontakt</a></li>
             </ul>
         </div>
     </nav>
 
     <section class="page-hero">
         <div class="container">
-            <h2>Services</h2>
-            <p>Was ich baue, wie ich es baue – und was es dir bringt.</p>
+            <div class="page-hero-inner">
+                <p class="section-label">Was ich baue</p>
+                <h2>Services</h2>
+                <p>Was du bekommst, wie es läuft – und was es kostet.</p>
+            </div>
         </div>
     </section>
 
     <section class="services-detail">
         <div class="container">
 
-            <!-- Service 1: Website -->
+            <!-- Service 1 -->
             <div class="service-block">
                 <div class="service-content">
                     <p class="service-number">Service 01</p>
                     <h3>Website-Erstellung</h3>
-                    <p>Eine Website die verkauft. Kein Baukasten-Template, kein generisches Design. Ich baue dir eine individuelle Seite, die auf deine Zielgruppe ausgerichtet ist und messbar mehr Anfragen oder Verkäufe generiert.</p>
+                    <p>Eine Website die verkauft. Kein Baukasten-Template, kein generisches Design. Ich baue dir eine individuelle Seite die auf deine Zielgruppe ausgerichtet ist und messbar mehr Anfragen generiert.</p>
                     <div class="detail-grid">
                         <div class="detail-item">
                             <h4>Was du bekommst</h4>
-                            <p>Mehrseitige Website, mobil-optimiert, schnell ladend, SEO-grundoptimiert, Kontaktformular, eigene Domain-Einbindung.</p>
+                            <p>Mehrseitige Website, mobil-optimiert, schnell ladend, SEO-grundoptimiert, Kontaktformular, Domain-Einbindung.</p>
                         </div>
                         <div class="detail-item">
                             <h4>Wie es läuft</h4>
-                            <p>Briefing-Call, Konzept & Design-Vorschlag, Entwicklung, Feedback-Runde, Live-Schaltung. Du entscheidest an jedem Schritt.</p>
+                            <p>Briefing-Call, Konzept, Entwicklung, Feedback-Runde, Live-Schaltung. Du entscheidest an jedem Schritt.</p>
                         </div>
                         <div class="detail-item">
                             <h4>Timeline</h4>
@@ -209,7 +56,7 @@
                         </div>
                         <div class="detail-item">
                             <h4>Technologie</h4>
-                            <p>HTML / CSS / JavaScript oder WordPress, je nach Anforderung. Hosting-Einrichtung inklusive.</p>
+                            <p>HTML / CSS / JS oder WordPress je nach Anforderung. Hosting-Einrichtung inklusive.</p>
                         </div>
                     </div>
                 </div>
@@ -217,7 +64,7 @@
                     <p class="price-label">Preis ab</p>
                     <p class="price-value">499 €</p>
                     <p class="price-note">Einmalig. Kein Abo.</p>
-                    <a href="index.html#contact" class="cta-button">Jetzt buchen</a>
+                    <a href="mailto:mktrades004@gmail.com" class="cta-button">Jetzt buchen</a>
                     <ul class="includes-list">
                         <li>Kostenloses Erstgespräch</li>
                         <li>Bis zu 5 Unterseiten</li>
@@ -227,24 +74,24 @@
                 </div>
             </div>
 
-            <!-- Service 2: KI ChatBot -->
+            <!-- Service 2 -->
             <div class="service-block">
                 <div class="service-content">
                     <p class="service-number">Service 02</p>
                     <h3>KI ChatBot</h3>
-                    <p>Dein Unternehmen antwortet rund um die Uhr – ohne zusätzliches Personal. Der Bot kennt dein Angebot, beantwortet Kundenfragen, qualifiziert Leads und leitet komplexe Fälle an dich weiter. Du fokussierst dich auf das, was Geld bringt.</p>
+                    <p>Dein Unternehmen antwortet rund um die Uhr – ohne zusätzliches Personal. Der Bot kennt dein Angebot, beantwortet Kundenfragen, qualifiziert Leads und leitet komplexe Fälle an dich weiter.</p>
                     <div class="detail-grid">
                         <div class="detail-item">
                             <h4>Was du bekommst</h4>
-                            <p>Trainierten KI-Assistenten, eingebettet auf deiner Website oder in WhatsApp / Instagram. Vollständig angepasst an deinen Ton und deine FAQs.</p>
+                            <p>Trainierten KI-Assistenten auf deiner Website oder in WhatsApp / Instagram. Vollständig angepasst an deinen Ton.</p>
                         </div>
                         <div class="detail-item">
                             <h4>Wie es läuft</h4>
-                            <p>Onboarding-Call, Bot-Training auf Basis deiner Inhalte, Integration, Test-Phase, Live-Schaltung. Du erhältst ein Dashboard für Gesprächsverläufe.</p>
+                            <p>Onboarding-Call, Bot-Training, Integration, Test-Phase, Live-Schaltung. Dashboard für Gesprächsverläufe inklusive.</p>
                         </div>
                         <div class="detail-item">
                             <h4>Timeline</h4>
-                            <p>7 – 14 Werktage. Abhängig von Umfang der Wissensbasis.</p>
+                            <p>7 – 14 Werktage. Abhängig vom Umfang der Wissensbasis.</p>
                         </div>
                         <div class="detail-item">
                             <h4>Technologie</h4>
@@ -256,7 +103,7 @@
                     <p class="price-label">Preis ab</p>
                     <p class="price-value">799 €</p>
                     <p class="price-note">Setup einmalig + optional 99 € / Monat Pflege</p>
-                    <a href="index.html#contact" class="cta-button">Jetzt buchen</a>
+                    <a href="mailto:mktrades004@gmail.com" class="cta-button">Jetzt buchen</a>
                     <ul class="includes-list">
                         <li>Training auf deine Inhalte</li>
                         <li>Integration in deine Plattform</li>
@@ -266,20 +113,20 @@
                 </div>
             </div>
 
-            <!-- Service 3: Automatisierungen -->
+            <!-- Service 3 -->
             <div class="service-block">
                 <div class="service-content">
                     <p class="service-number">Service 03</p>
                     <h3>Automatisierungen</h3>
-                    <p>Repetitive Aufgaben kosten Zeit die kein Unternehmen hat. Ich analysiere deinen Workflow, identifiziere die teuersten Engpässe und baue dir eine Automatisierung, die diese Prozesse ohne manuelle Eingriffe erledigt.</p>
+                    <p>Repetitive Aufgaben kosten Zeit die kein Unternehmen hat. Ich analysiere deinen Workflow, identifiziere die teuersten Engpässe und baue eine Automatisierung die diese Prozesse ohne manuelle Eingriffe erledigt.</p>
                     <div class="detail-grid">
                         <div class="detail-item">
                             <h4>Was du bekommst</h4>
-                            <p>Maßgeschneiderte Workflow-Automatisierung: E-Mail-Verarbeitung, Datenpflege, Benachrichtigungen, Lead-Routing, Angebotserstellung – je nach Bedarf.</p>
+                            <p>Maßgeschneiderte Workflow-Automatisierung: E-Mail-Verarbeitung, Datenpflege, Lead-Routing, Angebotserstellung.</p>
                         </div>
                         <div class="detail-item">
                             <h4>Wie es läuft</h4>
-                            <p>Prozess-Audit, Konzept mit Zeitersparnis-Schätzung, Umsetzung in Make / Zapier / n8n oder Custom-Skript, Übergabe mit Dokumentation.</p>
+                            <p>Prozess-Audit, Konzept mit Zeitersparnis-Schätzung, Umsetzung, Übergabe mit Dokumentation.</p>
                         </div>
                         <div class="detail-item">
                             <h4>Timeline</h4>
@@ -287,7 +134,7 @@
                         </div>
                         <div class="detail-item">
                             <h4>Technologie</h4>
-                            <p>Make, n8n, Zapier, Google Workspace APIs, OpenAI / Claude API, Custom Python / JavaScript.</p>
+                            <p>Make, n8n, Zapier, Google Workspace APIs, Claude / OpenAI API, Custom Python / JavaScript.</p>
                         </div>
                     </div>
                 </div>
@@ -295,11 +142,11 @@
                     <p class="price-label">Preis ab</p>
                     <p class="price-value">349 €</p>
                     <p class="price-note">Pro Automatisierung. Komplex ab 699 €.</p>
-                    <a href="index.html#contact" class="cta-button">Jetzt buchen</a>
+                    <a href="mailto:mktrades004@gmail.com" class="cta-button">Jetzt buchen</a>
                     <ul class="includes-list">
                         <li>Kostenloser Prozess-Audit</li>
                         <li>Vollständige Dokumentation</li>
-                        <li>Einweisung & Übergabe</li>
+                        <li>Einweisung &amp; Übergabe</li>
                         <li>14 Tage Support nach Lieferung</li>
                     </ul>
                 </div>
@@ -313,7 +160,13 @@
     </div>
 
     <footer class="footer">
-        <p>&copy; 2026 Milad KI.engineering. Alle Rechte vorbehalten.</p>
+        <div class="container">
+            <p>&copy; 2026 Milad KI.engineering. Alle Rechte vorbehalten.</p>
+            <ul class="footer-links">
+                <li><a href="services.html">Services</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+            </ul>
+        </div>
     </footer>
 
     <script src="script.js"></script>

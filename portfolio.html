@@ -4,132 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio – Milad KI.engineering</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <style>
-        .page-hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 4rem 0;
-            text-align: center;
-        }
-        .page-hero h2 {
-            font-size: 2.5rem;
-            margin-bottom: 0.75rem;
-        }
-        .page-hero p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        .portfolio-section {
-            padding: 5rem 0;
-            background: #f9f9f9;
-        }
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(520px, 1fr));
-            gap: 2.5rem;
-        }
-        .portfolio-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .portfolio-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 8px 24px rgba(102,126,234,0.2);
-        }
-        .portfolio-mockup {
-            width: 100%;
-            height: 220px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: rgba(255,255,255,0.85);
-            letter-spacing: 1px;
-        }
-        .mockup-1 { background: linear-gradient(135deg, #667eea, #764ba2); }
-        .mockup-2 { background: linear-gradient(135deg, #11998e, #38ef7d); color: rgba(255,255,255,0.85); }
-        .mockup-3 { background: linear-gradient(135deg, #f093fb, #f5576c); }
-        .mockup-4 { background: linear-gradient(135deg, #4facfe, #00f2fe); }
-
-        .portfolio-card-body {
-            padding: 1.75rem 2rem 2rem;
-        }
-        .portfolio-card-body h3 {
-            font-size: 1.3rem;
-            color: #1a1a1a;
-            margin-bottom: 0.5rem;
-        }
-        .portfolio-card-body p {
-            color: #555;
-            margin-bottom: 1rem;
-            line-height: 1.65;
-        }
-        .result-badge {
-            display: inline-block;
-            background: #f0f0ff;
-            color: #667eea;
-            border: 1px solid #d4daff;
-            border-radius: 4px;
-            padding: 0.3rem 0.75rem;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 1.25rem;
-        }
-        .portfolio-link {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: color 0.3s;
-        }
-        .portfolio-link:hover {
-            color: #764ba2;
-        }
-
-        .back-link-section {
-            padding: 2.5rem 0;
-            text-align: center;
-            background: #f9f9f9;
-            border-top: 1px solid #eee;
-        }
-        .back-link {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: color 0.3s;
-        }
-        .back-link:hover {
-            color: #764ba2;
-        }
-        .back-link::before {
-            content: "← ";
-        }
-    </style>
 </head>
 <body>
+
     <nav class="navbar">
         <div class="container">
-            <h1 class="logo">Milad KI.engineering</h1>
+            <a href="index.html" class="logo">Milad <span class="ki">KI</span>.engineering</a>
             <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
                 <li><a href="services.html">Services</a></li>
                 <li><a href="portfolio.html">Portfolio</a></li>
-                <li><a href="index.html#contact">Kontakt</a></li>
+                <li><a href="mailto:mktrades004@gmail.com" class="nav-cta">Kontakt</a></li>
             </ul>
         </div>
     </nav>
 
     <section class="page-hero">
         <div class="container">
-            <h2>Portfolio</h2>
-            <p>Abgeschlossene Projekte – Ergebnisse, die sprechen.</p>
+            <div class="page-hero-inner">
+                <p class="section-label">Abgeschlossene Projekte</p>
+                <h2>Portfolio</h2>
+                <p>Ergebnisse die sprechen.</p>
+            </div>
         </div>
     </section>
 
@@ -143,7 +42,7 @@
                         <h3>Website – Pizzeria Pinocchio</h3>
                         <p>Komplette Neugestaltung der Web-Präsenz für ein Familienrestaurant. Speisekarte, Reservierungsformular, Google Maps Integration. Optimiert für mobile Geräte und lokale Suchmaschinenplatzierung.</p>
                         <span class="result-badge">+40 % mehr Online-Reservierungen</span><br>
-                        <a href="#" class="portfolio-link">Live-Projekt ansehen</a>
+                        <a href="#" class="portfolio-link">Live-Projekt ansehen &rarr;</a>
                     </div>
                 </div>
 
@@ -153,7 +52,7 @@
                         <h3>KI ChatBot – E-Commerce Support</h3>
                         <p>Automatisierter Kundendienst-Bot für einen Online-Shop. Beantwortet Fragen zu Bestellungen, Versand und Retouren rund um die Uhr. Integriert in Shopify über Webhook.</p>
                         <span class="result-badge">80 % weniger Support-Anfragen per E-Mail</span><br>
-                        <a href="#" class="portfolio-link">Case Study lesen</a>
+                        <a href="#" class="portfolio-link">Case Study lesen &rarr;</a>
                     </div>
                 </div>
 
@@ -161,9 +60,9 @@
                     <div class="portfolio-mockup mockup-3">Automation</div>
                     <div class="portfolio-card-body">
                         <h3>Lead-Automatisierung – Handwerksbetrieb</h3>
-                        <p>Kontaktformular-Eingang wird automatisch in CRM eingetragen, Angebots-PDF generiert und per E-Mail versendet. Rückmeldung an den Kunden innerhalb von 2 Minuten – ohne manuellen Eingriff.</p>
+                        <p>Kontaktformular-Eingang wird automatisch ins CRM eingetragen, Angebots-PDF generiert und per E-Mail versendet. Rückmeldung an den Kunden innerhalb von 2 Minuten – ohne manuellen Eingriff.</p>
                         <span class="result-badge">3 Arbeitsstunden pro Woche eingespart</span><br>
-                        <a href="#" class="portfolio-link">Workflow ansehen</a>
+                        <a href="#" class="portfolio-link">Workflow ansehen &rarr;</a>
                     </div>
                 </div>
 
@@ -173,7 +72,7 @@
                         <h3>MailBrief Agent – SaaS MVP</h3>
                         <p>KI-gestützter E-Mail-Briefing-Dienst: Eingehende E-Mails werden analysiert, priorisiert und als tägliche Zusammenfassung zugestellt. Entwickelt mit Gmail API und Claude.</p>
                         <span class="result-badge">Aktives Produkt – in Entwicklung</span><br>
-                        <a href="#" class="portfolio-link">Mehr erfahren</a>
+                        <a href="#" class="portfolio-link">Mehr erfahren &rarr;</a>
                     </div>
                 </div>
 
@@ -186,7 +85,13 @@
     </div>
 
     <footer class="footer">
-        <p>&copy; 2026 Milad KI.engineering. Alle Rechte vorbehalten.</p>
+        <div class="container">
+            <p>&copy; 2026 Milad KI.engineering. Alle Rechte vorbehalten.</p>
+            <ul class="footer-links">
+                <li><a href="services.html">Services</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+            </ul>
+        </div>
     </footer>
 
     <script src="script.js"></script>
