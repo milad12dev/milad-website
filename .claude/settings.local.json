@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/mymac/**)"
+    ],
+    "additionalDirectories": [
+      "/Users/mymac/milad website "
+    ]
+  }
+}
