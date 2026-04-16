@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=2">
+    <link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
 
@@ -25,6 +25,11 @@
 
     <!-- Hero -->
     <section id="home" class="hero">
+        <div class="hero-bg">
+            <div class="hero-orb hero-orb-1"></div>
+            <div class="hero-orb hero-orb-2"></div>
+            <div class="hero-orb hero-orb-3"></div>
+        </div>
         <div class="container">
             <div class="hero-inner">
                 <div class="hero-badge">
@@ -76,7 +81,7 @@
             </div>
 
             <div class="service-grid">
-                <div class="service-card">
+                <div class="service-card" data-animate style="--i:0">
                     <div class="service-icon">
                         <svg viewBox="0 0 24 24">
                             <rect x="2" y="3" width="20" height="14" rx="2"/>
@@ -88,7 +93,7 @@
                     <a href="services.html" class="service-link">Details &amp; Preise &rarr;</a>
                 </div>
 
-                <div class="service-card">
+                <div class="service-card" data-animate style="--i:1">
                     <div class="service-icon">
                         <svg viewBox="0 0 24 24">
                             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
@@ -99,7 +104,7 @@
                     <a href="services.html" class="service-link">Details &amp; Preise &rarr;</a>
                 </div>
 
-                <div class="service-card">
+                <div class="service-card" data-animate style="--i:2">
                     <div class="service-icon">
                         <svg viewBox="0 0 24 24">
                             <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
