@@ -37,6 +37,13 @@ body {
   background: var(--bg);
   color: var(--text);
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--accent);
+  color: #07070f;
 }
 
 img { display: block; max-width: 100%; }
@@ -60,6 +67,12 @@ a { color: inherit; }
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
   padding: 1.1rem 0;
+  transition: padding 0.3s ease, border-color 0.3s ease;
+}
+
+.navbar.scrolled {
+  padding: 0.7rem 0;
+  border-bottom-color: rgba(255, 255, 255, 0.1);
 }
 
 .navbar .container {
@@ -137,6 +150,7 @@ a { color: inherit; }
   mask-image: radial-gradient(ellipse 85% 80% at 50% 35%, black 5%, transparent 72%);
   pointer-events: none;
   z-index: 0;
+
 }
 
 .hero-inner {
@@ -159,7 +173,6 @@ a { color: inherit; }
   letter-spacing: 0.08em;
   text-transform: uppercase;
   margin-bottom: 2rem;
-  animation: fadeUp 0.6s ease both;
 }
 
 .hero-badge-dot {
@@ -170,7 +183,7 @@ a { color: inherit; }
   animation: blink 2s ease-in-out infinite;
 }
 
-.hero h2 {
+.hero-headline {
   font-family: 'Syne', sans-serif;
   font-size: clamp(2.8rem, 7vw, 5.25rem);
   font-weight: 800;
@@ -178,24 +191,23 @@ a { color: inherit; }
   letter-spacing: -0.03em;
   color: var(--text);
   margin-bottom: 1.5rem;
-  animation: fadeUp 0.6s ease 0.1s both;
 }
 
-.hero h2 .hi {
+.hero-headline .hi {
   background: linear-gradient(135deg, var(--accent) 0%, #7fffea 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-.hero > .container > .hero-inner > p {
+.hero > .container > .hero-inner > p,
+.hero-sub {
   font-size: clamp(1rem, 2vw, 1.15rem);
   color: var(--text-muted);
   max-width: 500px;
   margin-bottom: 2.5rem;
   font-weight: 400;
   line-height: 1.7;
-  animation: fadeUp 0.6s ease 0.2s both;
 }
 
 .hero-actions {
@@ -203,7 +215,6 @@ a { color: inherit; }
   gap: 1rem;
   align-items: center;
   flex-wrap: wrap;
-  animation: fadeUp 0.6s ease 0.3s both;
 }
 
 .hero-stats {
@@ -212,7 +223,6 @@ a { color: inherit; }
   margin-top: 4rem;
   padding-top: 2.5rem;
   border-top: 1px solid var(--border);
-  animation: fadeUp 0.6s ease 0.45s both;
 }
 
 .hero-stat-value {
@@ -532,7 +542,7 @@ a { color: inherit; }
   z-index: 2;
 }
 
-.page-hero h2 {
+.page-hero h1 {
   font-family: 'Syne', sans-serif;
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 800;
@@ -969,7 +979,21 @@ button:focus-visible {
 }
 
 /* ===== SCROLL ANIMATIONS ===== */
-[data-animate] {
+/* Hide data-reveal elements until GSAP animates them in.
+   Without this, elements flash visible before GSAP sets opacity: 0. */
+[data-reveal],
+[data-reveal-batch] {
+  opacity: 0;
+}
+
+/* Fallback: if GSAP never loads, make them visible */
+body:not(.gsap-ready) [data-reveal],
+body:not(.gsap-ready) [data-reveal-batch] {
+  opacity: 1;
+}
+
+/* CSS fallback — GSAP overrides these when loaded */
+body:not(.gsap-ready) [data-animate] {
   opacity: 0;
   transform: translateY(30px);
   transition:
@@ -977,14 +1001,14 @@ button:focus-visible {
     transform 0.65s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--i, 0) * 110ms);
 }
 
-[data-animate].is-visible {
+body:not(.gsap-ready) [data-animate].is-visible {
   opacity: 1;
   transform: none;
 }
 
 /* ===== REDUCED MOTION ===== */
 @media (prefers-reduced-motion: reduce) {
-  [data-animate] {
+  body:not(.gsap-ready) [data-animate] {
     opacity: 1;
     transform: none;
     transition: none !important;
@@ -992,5 +1016,149 @@ button:focus-visible {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* ===== CUSTOM CURSOR ===== */
+#cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: width 0.22s ease, height 0.22s ease, opacity 0.25s ease, background 0.2s ease, border 0.22s ease;
+}
+
+#cursor.is-visible {
+  opacity: 1;
+}
+
+#cursor.is-active {
+  width: 28px;
+  height: 28px;
+  background: rgba(0, 217, 184, 0.1);
+  border: 1px solid rgba(0, 217, 184, 0.35);
+}
+
+@media (hover: none) {
+  #cursor { display: none !important; }
+}
+
+/* ===== PROCESS SECTION ===== */
+.process {
+  padding: 6rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.process-header {
+  margin-bottom: 3.5rem;
+}
+
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+}
+
+.process-step {
+  position: relative;
+}
+
+.step-num {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2.8rem, 5vw, 4rem);
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 1rem;
+  letter-spacing: -0.04em;
+  opacity: 0.9;
+}
+
+.process-step h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.65rem;
+  letter-spacing: -0.01em;
+}
+
+.process-step p {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+  .process-steps {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+/* ===== CTA BAND ===== */
+.cta-band-section {
+  padding: 6rem 0;
+}
+
+.cta-band-inner {
+  background: linear-gradient(135deg, rgba(0, 217, 184, 0.07) 0%, rgba(85, 40, 220, 0.05) 60%, transparent 100%);
+  border: 1px solid rgba(0, 217, 184, 0.14);
+  border-radius: var(--radius-lg);
+  padding: 4rem 3rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-band-inner::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 640px;
+  height: 360px;
+  background: radial-gradient(ellipse, rgba(0, 217, 184, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.cta-band-inner > * {
+  position: relative;
+  z-index: 1;
+}
+
+.cta-band-inner h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: var(--text);
+  margin-bottom: 0.9rem;
+}
+
+.cta-band-inner p {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  margin-bottom: 2.5rem;
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-band-inner .section-label {
+  margin-bottom: 0.75rem;
+}
+
+@media (max-width: 640px) {
+  .cta-band-inner {
+    padding: 3rem 1.5rem;
   }
 }

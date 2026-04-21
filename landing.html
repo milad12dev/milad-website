@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Du machst alles selbst – und merkst, dass es nicht skaliert. KI-Automatisierung, Chatbots und Websites die arbeiten, während du es nicht tust.">
+    <title>Milad KI.engineering – Raus aus dem Hamsterrad</title>
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Dein Business läuft. Aber du läufst mit.">
+    <meta property="og:description" content="KI-Automatisierung & Webservices die deinen Arbeitsalltag dauerhaft leichter machen.">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2300d9b8'/%3E%3Cstop offset='1' stop-color='%235528dc'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3C/svg%3E">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=4">
+
+    <style>
+        /* ===== LANDING PAGE STYLES ===== */
+
+        /* Pain section */
+        .lp-pain {
+            padding: 6rem 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .lp-pain-header {
+            margin-bottom: 3rem;
+        }
+
+        .pain-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+        }
+
+        .pain-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.3s;
+        }
+
+        .pain-card:hover {
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .pain-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,80,80,0.4), transparent);
+        }
+
+        .pain-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 80, 80, 0.08);
+            border: 1px solid rgba(255, 80, 80, 0.15);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+        }
+
+        .pain-icon svg {
+            width: 18px;
+            height: 18px;
+            stroke: rgba(255, 130, 130, 0.9);
+            fill: none;
+            stroke-width: 1.75;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .pain-card h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.6rem;
+            letter-spacing: -0.01em;
+        }
+
+        .pain-card p {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            line-height: 1.65;
+        }
+
+        /* Bridge / Divider */
+        .lp-bridge {
+            padding: 5rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lp-bridge::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 70% 80% at 50% 50%, rgba(0, 217, 184, 0.04) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .bridge-inner {
+            position: relative;
+            z-index: 1;
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        .bridge-line {
+            display: block;
+            width: 1px;
+            height: 48px;
+            background: linear-gradient(to bottom, transparent, var(--accent));
+            margin: 0 auto 2.5rem;
+        }
+
+        .bridge-statement {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+            font-weight: 800;
+            color: var(--text);
+            letter-spacing: -0.025em;
+            line-height: 1.15;
+            margin-bottom: 1rem;
+        }
+
+        .bridge-statement .accent-word {
+            color: var(--accent);
+        }
+
+        .bridge-sub {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* Solution / Services variant */
+        .lp-solution {
+            padding: 6rem 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .lp-solution-header {
+            margin-bottom: 3rem;
+        }
+
+        /* Results strip */
+        .lp-results {
+            padding: 5rem 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .lp-results-header {
+            margin-bottom: 3rem;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+        }
+
+        .result-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .result-card:hover {
+            border-color: rgba(0, 217, 184, 0.18);
+            transform: translateY(-4px);
+        }
+
+        .result-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .result-card:hover::after {
+            opacity: 1;
+        }
+
+        .result-number {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 800;
+            color: var(--accent);
+            letter-spacing: -0.03em;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-label {
+            font-weight: 600;
+            color: var(--text);
+            font-size: 0.9rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .result-context {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* Sticky CTA hint at bottom (mobile only) */
+        .sticky-cta {
+            display: none;
+            position: fixed;
+            bottom: 1.25rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            width: calc(100% - 3rem);
+            max-width: 480px;
+        }
+
+        .sticky-cta a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 100%;
+            padding: 1rem;
+            background: var(--accent);
+            color: #07070f;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            border-radius: 12px;
+            text-decoration: none;
+            box-shadow: 0 8px 32px rgba(0, 217, 184, 0.35);
+        }
+
+        @media (max-width: 768px) {
+            .sticky-cta { display: block; }
+
+            .pain-grid,
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="cursor" aria-hidden="true"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">Milad <span class="ki">KI</span>.engineering</a>
+            <ul class="nav-links">
+                <li><a href="services.html">Services</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="mailto:mktrades004@gmail.com" class="nav-cta">Kontakt</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero: Problem-first -->
+    <section class="hero">
+        <div class="hero-bg">
+            <div class="hero-orb hero-orb-1"></div>
+            <div class="hero-orb hero-orb-2"></div>
+            <div class="hero-orb hero-orb-3"></div>
+        </div>
+        <div class="container">
+            <div class="hero-inner">
+                <div class="hero-badge">
+                    <span class="hero-badge-dot"></span>
+                    Für Selbstständige &amp; Kleinunternehmer
+                </div>
+
+                <h1 class="hero-headline">
+                    Dein Business läuft.<br>
+                    <span class="hi">Aber du läufst mit.</span>
+                </h1>
+
+                <p class="hero-sub">
+                    Anfragen per Hand. Leads die kalt werden. Eine Website die nichts tut.
+                    Das ist kein Wachstum – das ist ein zweiter Job ohne Feierabend.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="mailto:mktrades004@gmail.com" class="btn btn-primary" data-magnetic>Kostenloses Erstgespräch &rarr;</a>
+                    <a href="#loesung" class="btn btn-ghost">Zeig mir die Lösung</a>
+                </div>
+
+                <div class="hero-stats">
+                    <div>
+                        <div class="hero-stat-value">+40%</div>
+                        <div class="hero-stat-label">mehr Reservierungen</div>
+                    </div>
+                    <div>
+                        <div class="hero-stat-value">80%</div>
+                        <div class="hero-stat-label">weniger Support-E-Mails</div>
+                    </div>
+                    <div>
+                        <div class="hero-stat-value">3 h/Woche</div>
+                        <div class="hero-stat-label">eingespart pro Kunde</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pain Points -->
+    <section class="lp-pain">
+        <div class="container">
+            <div class="lp-pain-header" data-reveal>
+                <p class="section-label">Erkennst du das hier?</p>
+                <h2 class="section-title">Diese drei Dinge<br>kosten dich täglich Geld.</h2>
+            </div>
+
+            <div class="pain-grid">
+                <div class="pain-card" data-reveal-batch>
+                    <div class="pain-icon">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                            <polyline points="22,6 12,13 2,6"/>
+                        </svg>
+                    </div>
+                    <h3>Gleiche Fragen, jeden Tag</h3>
+                    <p>Du schreibst dieselben E-Mails immer wieder. Preise erklären, Termine koordinieren, Rückfragen beantworten – per Hand, jeden Morgen.</p>
+                </div>
+
+                <div class="pain-card" data-reveal-batch>
+                    <div class="pain-icon">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <line x1="23" y1="11" x2="17" y2="11"/>
+                        </svg>
+                    </div>
+                    <h3>Leads die kalt werden</h3>
+                    <p>Interessenten warten stundenlang auf Antwort. Die Hälfte hat bis dahin bereits beim nächsten angefragt. Du weißt es nicht einmal.</p>
+                </div>
+
+                <div class="pain-card" data-reveal-batch>
+                    <div class="pain-icon">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <rect x="2" y="3" width="20" height="14" rx="2"/>
+                            <line x1="8" y1="21" x2="16" y2="21"/>
+                            <line x1="12" y1="17" x2="12" y2="21"/>
+                        </svg>
+                    </div>
+                    <h3>Website die nichts tut</h3>
+                    <p>Du hast eine Online-Präsenz, aber sie bringt keine Anfragen. Sie sieht aus wie 2017 und konvertiert entsprechend – nämlich gar nicht.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bridge -->
+    <section class="lp-bridge">
+        <div class="container">
+            <div class="bridge-inner" data-reveal>
+                <span class="bridge-line" aria-hidden="true"></span>
+                <p class="bridge-statement">
+                    Das ist kein <span class="accent-word">Versagen.</span><br>
+                    Das ist ein Systemfehler.
+                </p>
+                <p class="bridge-sub">
+                    Die meisten Selbstständigen arbeiten mit Werkzeugen aus 2015 und fragen sich, warum sie nicht wachsen. Die Wahrheit: nicht du bist das Problem – deine Prozesse sind es.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution -->
+    <section id="loesung" class="lp-solution">
+        <div class="container">
+            <div class="lp-solution-header" data-reveal>
+                <p class="section-label">Die Lösung</p>
+                <h2 class="section-title">Systeme die arbeiten,<br>während du es nicht tust.</h2>
+                <p class="section-sub">Kein Baukasten, kein Template. Ich analysiere deinen Engpass und baue genau das, was ihn löst.</p>
+            </div>
+
+            <div class="service-grid">
+                <div class="service-card" data-reveal-batch>
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <rect x="2" y="3" width="20" height="14" rx="2"/>
+                            <path d="M8 21h8M12 17v4"/>
+                        </svg>
+                    </div>
+                    <h3>Website die verkauft</h3>
+                    <p>Dein Angebot klar kommuniziert, mobil-optimiert, schnell – und so gebaut dass Besucher zu Anfragen werden. Kein Baukasten.</p>
+                    <a href="services.html" class="service-link">Ab 499 € einmalig &rarr;</a>
+                </div>
+
+                <div class="service-card" data-reveal-batch>
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                        </svg>
+                    </div>
+                    <h3>KI der antwortet</h3>
+                    <p>Dein Unternehmen antwortet 24/7. Der Bot kennt dein Angebot, qualifiziert Leads und hält sie warm – du meldest dich wenn es zählt.</p>
+                    <a href="services.html" class="service-link">Ab 799 € Setup &rarr;</a>
+                </div>
+
+                <div class="service-card" data-reveal-batch>
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </div>
+                    <h3>Prozesse die laufen</h3>
+                    <p>Leads ins CRM, Angebote generieren, E-Mails verarbeiten – einmal einrichten, dauerhaft Zeit sparen. Ohne dass du etwas tun musst.</p>
+                    <a href="services.html" class="service-link">Ab 349 € &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results -->
+    <section class="lp-results">
+        <div class="container">
+            <div class="lp-results-header" data-reveal>
+                <p class="section-label">Ergebnisse</p>
+                <h2 class="section-title">Was Kunden<br>tatsächlich bekommen.</h2>
+            </div>
+
+            <div class="results-grid">
+                <div class="result-card" data-reveal-batch>
+                    <div class="result-number">+40%</div>
+                    <div class="result-label">mehr Online-Reservierungen</div>
+                    <div class="result-context">Pizzeria Pinocchio – Website-Neugestaltung mit mobilem Reservierungsformular und lokaler SEO-Optimierung.</div>
+                </div>
+
+                <div class="result-card" data-reveal-batch>
+                    <div class="result-number">80%</div>
+                    <div class="result-label">weniger Support-E-Mails</div>
+                    <div class="result-context">E-Commerce-Shop – KI-Chatbot beantwortet Fragen zu Bestellungen, Versand und Retouren rund um die Uhr.</div>
+                </div>
+
+                <div class="result-card" data-reveal-batch>
+                    <div class="result-number">3 h</div>
+                    <div class="result-label">eingespart pro Woche</div>
+                    <div class="result-context">Handwerksbetrieb – Lead-Eingang automatisch ins CRM, Angebot generiert, Rückmeldung in 2 Minuten.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process -->
+    <section class="process">
+        <div class="container">
+            <div class="process-header" data-reveal>
+                <p class="section-label">So läuft es ab</p>
+                <h2 class="section-title">Drei Schritte.<br>Von Anfrage bis Live.</h2>
+            </div>
+            <div class="process-steps">
+                <div class="process-step" data-reveal-batch>
+                    <div class="step-num">01</div>
+                    <h3>Gespräch</h3>
+                    <p>15 Minuten reichen. Ich verstehe dein Problem, du bekommst eine ehrliche Einschätzung ohne Verkaufsdruck.</p>
+                </div>
+                <div class="process-step" data-reveal-batch>
+                    <div class="step-num">02</div>
+                    <h3>Umsetzung</h3>
+                    <p>Ich entwickle, du gibst Feedback. Kein Black-Box-Prozess – du siehst jeden Schritt und entscheidest.</p>
+                </div>
+                <div class="process-step" data-reveal-batch>
+                    <div class="step-num">03</div>
+                    <h3>Launch</h3>
+                    <p>Live-Schaltung, Übergabe, Support. In weniger als 10 Tagen vom ersten Call bis zum fertigen Ergebnis.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Band -->
+    <section id="contact" class="cta-band-section">
+        <div class="container">
+            <div class="cta-band-inner" data-reveal>
+                <p class="section-label">Jetzt starten</p>
+                <h2>Genug manuelle Arbeit.</h2>
+                <p>Schreib mir kurz deinen größten Engpass. Das Erstgespräch ist kostenlos – und du gehst mit einem konkreten Plan raus.</p>
+                <a href="mailto:mktrades004@gmail.com" class="btn btn-primary" data-magnetic>Kostenloses Erstgespräch &rarr;</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Milad KI.engineering. Alle Rechte vorbehalten.</p>
+            <ul class="footer-links">
+                <li><a href="index.html">Startseite</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Sticky mobile CTA -->
+    <div class="sticky-cta" id="sticky-cta" aria-hidden="true">
+        <a href="mailto:mktrades004@gmail.com">Kostenloses Erstgespräch &rarr;</a>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+    <script src="script.js"></script>
+
+    <script>
+        // Sticky mobile CTA: hide until user scrolls past hero
+        if (typeof ScrollTrigger !== 'undefined') {
+            const stickyCta = document.getElementById('sticky-cta');
+            if (stickyCta) {
+                gsap.set(stickyCta, { y: 80, opacity: 0 });
+                ScrollTrigger.create({
+                    trigger: '.lp-pain',
+                    start: 'top 80%',
+                    onEnter: () => gsap.to(stickyCta, { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out' }),
+                    onLeaveBack: () => gsap.to(stickyCta, { y: 80, opacity: 0, duration: 0.3, ease: 'power2.in' }),
+                });
+                stickyCta.removeAttribute('aria-hidden');
+            }
+        }
+    </script>
+</body>
+</html>
