@@ -3,189 +3,1053 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="KI-Automatisierung, Chatbots und individuelle Websites – gebaut für messbare Ergebnisse. Kein Baukasten, kein Generisches. In weniger als 10 Tagen live.">
-    <title>Milad KI.engineering – Automatisierung & Webservices</title>
+    <meta name="description" content="Milad Köksal – KI-Automatisierung, Chatbots und individuelle Websites. Systeme die arbeiten, während du es nicht tust.">
+    <title>Milad KI.engineering – KI-Automatisierung & Webservices</title>
 
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Milad KI.engineering – Automatisierung & Webservices">
-    <meta property="og:description" content="KI-Automatisierung, Chatbots und individuelle Websites – gebaut für messbare Ergebnisse.">
+    <meta property="og:title" content="Milad KI.engineering">
+    <meta property="og:description" content="KI-Automatisierung, Chatbots und Websites die Ergebnisse liefern.">
     <meta name="twitter:card" content="summary_large_image">
 
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2300d9b8'/%3E%3Cstop offset='1' stop-color='%235528dc'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3C/svg%3E">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Outfit:wght@300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css?v=4">
+
+    <style>
+        /* ===== NEURAL PAGE THEME ===== */
+        :root {
+            --teal:    #00d9b8;
+            --magenta: #e040fb;
+            --amber:   #ffbe3c;
+            --bg:      #07080f;
+            --bg-2:    #0c0d1a;
+            --surface: rgba(255,255,255,0.03);
+            --border:  rgba(255,255,255,0.07);
+        }
+
+        body { background: var(--bg); cursor: none; }
+
+        /* ===== NEURAL CANVAS ===== */
+        #neural-canvas {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* ===== CURSOR ===== */
+        #cursor {
+            position: fixed;
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: var(--teal);
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%,-50%);
+            opacity: 0;
+            transition: width .2s, height .2s, opacity .25s, background .2s;
+        }
+        #cursor.is-visible { opacity: 1; }
+        #cursor.is-active {
+            width: 28px; height: 28px;
+            background: rgba(0,217,184,.1);
+            border: 1px solid rgba(0,217,184,.4);
+        }
+        @media (hover:none) { #cursor { display:none!important; } body { cursor: auto; } }
+
+        /* ===== SCROLL SPINE ===== */
+        #scroll-spine {
+            position: fixed;
+            left: 28px;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 260px;
+            width: 2px;
+            z-index: 50;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .spine-track {
+            position: relative;
+            width: 2px;
+            height: 100%;
+            background: rgba(0,217,184,.12);
+            border-radius: 99px;
+            overflow: visible;
+        }
+        .spine-fill {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            background: linear-gradient(to bottom, var(--teal), var(--magenta));
+            border-radius: 99px;
+            transition: height .1s linear;
+        }
+        .spine-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: var(--teal);
+            box-shadow: 0 0 8px var(--teal), 0 0 20px rgba(0,217,184,.4);
+            transition: top .1s linear;
+        }
+        .spine-tick {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px; height: 4px;
+            border-radius: 50%;
+            background: rgba(0,217,184,.3);
+            transition: background .3s, transform .3s;
+        }
+        .spine-tick.active {
+            background: var(--teal);
+            transform: translateX(-50%) scale(1.5);
+        }
+        @media (max-width: 900px) { #scroll-spine { display: none; } }
+
+        /* ===== CONTENT WRAPPER ===== */
+        .np-wrap {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== NAVBAR override ===== */
+        .navbar {
+            background: rgba(7,8,15,.75);
+            border-bottom-color: rgba(0,217,184,.1);
+        }
+        .logo .ki { color: var(--teal); }
+
+        /* ===== HERO ===== */
+        .np-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 7rem 0 5rem;
+        }
+        .np-hero .container { max-width: 860px; }
+
+        .hero-location {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: .72rem;
+            letter-spacing: .14em;
+            color: rgba(0,217,184,.7);
+            margin-bottom: 1.75rem;
+        }
+        .hero-location::before {
+            content: '';
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--teal);
+            animation: blink 2s ease-in-out infinite;
+        }
+
+        .hero-name {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 800;
+            letter-spacing: -.04em;
+            line-height: 1;
+            color: #fff;
+            margin-bottom: .6rem;
+        }
+
+        .hero-title-line {
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: clamp(1rem, 2.5vw, 1.4rem);
+            color: var(--teal);
+            margin-bottom: 1.75rem;
+            min-height: 2rem;
+        }
+        .hero-title-line::before { content: '> '; opacity: .5; }
+        #typing-text { }
+        .cursor-blink {
+            display: inline-block;
+            width: 2px; height: 1.1em;
+            background: var(--teal);
+            margin-left: 2px;
+            vertical-align: middle;
+            animation: blink .9s step-end infinite;
+        }
+
+        .hero-tagline {
+            font-size: clamp(.95rem, 1.8vw, 1.1rem);
+            color: rgba(238,238,248,.6);
+            max-width: 560px;
+            line-height: 1.75;
+            margin-bottom: 2.5rem;
+        }
+        .hero-tagline strong { color: var(--teal); font-weight: 500; }
+
+        .hero-ctas {
+            display: flex;
+            gap: .75rem;
+            flex-wrap: wrap;
+        }
+
+        /* ===== HUD BUTTON ===== */
+        .btn-hud {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .7rem 1.5rem;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: .82rem;
+            letter-spacing: .06em;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all .2s;
+            clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+        }
+        .btn-hud-primary {
+            background: var(--teal);
+            color: #07080f;
+            font-weight: 700;
+        }
+        .btn-hud-primary:hover {
+            background: #00f0ce;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(0,217,184,.35);
+        }
+        .btn-hud-ghost {
+            background: rgba(0,217,184,.08);
+            color: var(--teal);
+            border: 1px solid rgba(0,217,184,.25);
+        }
+        .btn-hud-ghost:hover {
+            background: rgba(0,217,184,.15);
+            transform: translateY(-2px);
+        }
+
+        /* ===== GLYPH DIVIDER ===== */
+        .glyph-divider {
+            text-align: center;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: .85rem;
+            letter-spacing: .3em;
+            color: rgba(0,217,184,.2);
+            padding: 2rem 0;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        /* ===== SECTIONS ===== */
+        .np-section {
+            padding: 5.5rem 0;
+        }
+
+        .section-hud-label {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: .72rem;
+            letter-spacing: .22em;
+            color: var(--hud-color, var(--teal));
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+        }
+        .section-hud-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, var(--hud-color, var(--teal)), transparent);
+            opacity: .3;
+            max-width: 120px;
+        }
+
+        .np-section-title {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+            font-weight: 800;
+            letter-spacing: -.03em;
+            color: #fff;
+            line-height: 1.1;
+            margin-bottom: 3rem;
+        }
+
+        /* ===== HUD CARD ===== */
+        .hud-card {
+            position: relative;
+            background: var(--surface);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 2rem;
+            transition: border-color .3s;
+        }
+        .hud-card:hover { border-color: rgba(0,217,184,.18); }
+
+        /* Corner brackets */
+        .hud-card::before, .hud-card::after,
+        .hud-card .hud-corner-br, .hud-card .hud-corner-tl-inner {
+            content: '';
+            position: absolute;
+            width: 14px; height: 14px;
+        }
+        .hud-card::before {
+            top: -1px; left: -1px;
+            border-top: 2px solid var(--corner-color, var(--teal));
+            border-left: 2px solid var(--corner-color, var(--teal));
+        }
+        .hud-card::after {
+            bottom: -1px; right: -1px;
+            border-bottom: 2px solid var(--corner-color, var(--teal));
+            border-right: 2px solid var(--corner-color, var(--teal));
+        }
+
+        /* ===== ABOUT ===== */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 2rem;
+            align-items: start;
+        }
+        .about-text p {
+            color: rgba(238,238,248,.65);
+            font-size: .95rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        .about-text p strong { color: var(--teal); font-weight: 500; }
+        .about-status {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            margin-top: .5rem;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: .7rem;
+            letter-spacing: .1em;
+            color: var(--teal);
+            padding: .4rem .9rem;
+            border: 1px solid rgba(0,217,184,.25);
+            border-radius: 2px;
+        }
+        .about-status::before {
+            content: '';
+            width: 5px; height: 5px;
+            border-radius: 50%;
+            background: var(--teal);
+            animation: blink 2s ease-in-out infinite;
+        }
+        .about-side {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .stat-chip {
+            background: rgba(0,217,184,.06);
+            border: 1px solid rgba(0,217,184,.15);
+            border-radius: 2px;
+            padding: .9rem 1.1rem;
+            clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+        }
+        .stat-chip-value {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--teal);
+            line-height: 1;
+        }
+        .stat-chip-label {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: .65rem;
+            letter-spacing: .1em;
+            color: rgba(238,238,248,.45);
+            margin-top: .2rem;
+        }
+
+        /* ===== SERVICES ===== */
+        .np-service-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+        }
+        .np-service-card {
+            --corner-color: var(--magenta);
+            position: relative;
+            background: var(--surface);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 1.75rem;
+            transition: border-color .3s, transform .3s;
+        }
+        .np-service-card:hover {
+            border-color: rgba(224,64,251,.2);
+            transform: translateY(-4px);
+        }
+        .np-service-card::before {
+            content: '';
+            position: absolute;
+            top: -1px; left: -1px;
+            width: 14px; height: 14px;
+            border-top: 2px solid var(--magenta);
+            border-left: 2px solid var(--magenta);
+        }
+        .np-service-card::after {
+            content: '';
+            position: absolute;
+            bottom: -1px; right: -1px;
+            width: 14px; height: 14px;
+            border-bottom: 2px solid var(--magenta);
+            border-right: 2px solid var(--magenta);
+        }
+        .service-num {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: .65rem;
+            letter-spacing: .2em;
+            color: rgba(224,64,251,.6);
+            margin-bottom: 1rem;
+        }
+        .np-service-card h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: .5rem;
+            letter-spacing: -.01em;
+        }
+        .np-service-card p {
+            font-size: .85rem;
+            color: rgba(238,238,248,.55);
+            line-height: 1.65;
+            margin-bottom: 1.25rem;
+        }
+        .np-service-price {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: .75rem;
+            color: var(--magenta);
+            letter-spacing: .06em;
+            margin-bottom: 1rem;
+        }
+        .service-link-hud {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: .72rem;
+            letter-spacing: .08em;
+            color: rgba(224,64,251,.7);
+            text-decoration: none;
+            transition: color .2s;
+        }
+        .service-link-hud:hover { color: var(--magenta); }
+
+        /* ===== RESULTS ===== */
+        .np-results-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+        }
+        .np-result-card {
+            --corner-color: var(--amber);
+            position: relative;
+            background: var(--surface);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 1.75rem;
+            transition: border-color .3s, transform .3s;
+        }
+        .np-result-card:hover {
+            border-color: rgba(255,190,60,.2);
+            transform: translateY(-4px);
+        }
+        .np-result-card::before {
+            content: '';
+            position: absolute;
+            top: -1px; left: -1px;
+            width: 14px; height: 14px;
+            border-top: 2px solid var(--amber);
+            border-left: 2px solid var(--amber);
+        }
+        .np-result-card::after {
+            content: '';
+            position: absolute;
+            bottom: -1px; right: -1px;
+            width: 14px; height: 14px;
+            border-bottom: 2px solid var(--amber);
+            border-right: 2px solid var(--amber);
+        }
+        .result-metric {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 800;
+            color: var(--amber);
+            letter-spacing: -.03em;
+            line-height: 1;
+            margin-bottom: .4rem;
+        }
+        .result-what {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: .72rem;
+            letter-spacing: .1em;
+            color: rgba(238,238,248,.8);
+            margin-bottom: .5rem;
+        }
+        .result-desc {
+            font-size: .82rem;
+            color: rgba(238,238,248,.45);
+            line-height: 1.6;
+        }
+
+        /* ===== SKILLS ===== */
+        .skills-block { margin-bottom: 2rem; }
+        .skills-category {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: .65rem;
+            letter-spacing: .2em;
+            color: rgba(238,238,248,.35);
+            margin-bottom: .75rem;
+        }
+        .skills-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .5rem;
+        }
+        .skill-chip {
+            display: inline-block;
+            padding: .32rem .85rem;
+            clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: .73rem;
+            letter-spacing: .04em;
+            transition: all .2s;
+            cursor: default;
+        }
+        .skill-chip-teal {
+            background: rgba(0,217,184,.08);
+            border: 1px solid rgba(0,217,184,.2);
+            color: var(--teal);
+        }
+        .skill-chip-teal:hover { background: rgba(0,217,184,.16); }
+        .skill-chip-amber {
+            background: rgba(255,190,60,.07);
+            border: 1px solid rgba(255,190,60,.18);
+            color: var(--amber);
+        }
+        .skill-chip-amber:hover { background: rgba(255,190,60,.14); }
+        .skill-chip-magenta {
+            background: rgba(224,64,251,.07);
+            border: 1px solid rgba(224,64,251,.18);
+            color: var(--magenta);
+        }
+        .skill-chip-magenta:hover { background: rgba(224,64,251,.14); }
+
+        /* ===== CONTACT ===== */
+        .np-contact-inner {
+            max-width: 620px;
+        }
+        .np-contact-inner p {
+            color: rgba(238,238,248,.6);
+            font-size: .95rem;
+            line-height: 1.75;
+            margin-bottom: 2rem;
+        }
+        .contact-links {
+            display: flex;
+            gap: .75rem;
+            flex-wrap: wrap;
+            margin-top: 2.5rem;
+        }
+
+        /* ===== SCANLINE overlay ===== */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 3px,
+                rgba(0,0,0,.018) 3px,
+                rgba(0,0,0,.018) 4px
+            );
+            pointer-events: none;
+            z-index: 998;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .about-grid { grid-template-columns: 1fr; }
+            .about-side { flex-direction: row; }
+            .np-service-grid,
+            .np-results-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 640px) {
+            .about-side { flex-direction: column; }
+            .hero-ctas { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
 </head>
 <body>
 
-    <div id="cursor" aria-hidden="true"></div>
+<canvas id="neural-canvas" aria-hidden="true"></canvas>
+<div id="scroll-spine" aria-hidden="true">
+    <div class="spine-track">
+        <div class="spine-fill" id="spine-fill"></div>
+        <div class="spine-dot"  id="spine-dot"></div>
+        <div class="spine-tick" style="top:8%"  data-section="home"></div>
+        <div class="spine-tick" style="top:22%" data-section="about"></div>
+        <div class="spine-tick" style="top:40%" data-section="services"></div>
+        <div class="spine-tick" style="top:58%" data-section="results"></div>
+        <div class="spine-tick" style="top:76%" data-section="skills"></div>
+        <div class="spine-tick" style="top:92%" data-section="contact"></div>
+    </div>
+</div>
+<div id="cursor" aria-hidden="true"></div>
 
-    <!-- Navigation -->
+<div class="np-wrap">
+
+    <!-- NAV -->
     <nav class="navbar">
         <div class="container">
             <a href="index.html" class="logo">Milad <span class="ki">KI</span>.engineering</a>
             <ul class="nav-links">
                 <li><a href="#services">Services</a></li>
-                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="#results">Portfolio</a></li>
                 <li><a href="mailto:mktrades004@gmail.com" class="nav-cta">Kontakt</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Hero -->
-    <section id="home" class="hero">
-        <div class="hero-bg">
-            <div class="hero-orb hero-orb-1"></div>
-            <div class="hero-orb hero-orb-2"></div>
-            <div class="hero-orb hero-orb-3"></div>
-        </div>
+    <!-- HERO -->
+    <section id="home" class="np-hero">
         <div class="container">
-            <div class="hero-inner">
-                <div class="hero-badge">
-                    <span class="hero-badge-dot"></span>
-                    KI-Automatisierung &amp; Webservices
+            <div class="hero-location">NORTHEIM, DE · VERFÜGBAR · FREELANCE</div>
+
+            <h1 class="hero-name">Milad Köksal</h1>
+
+            <div class="hero-title-line">
+                <span id="typing-text"></span><span class="cursor-blink"></span>
+            </div>
+
+            <p class="hero-tagline">
+                Ich baue <strong>KI-Systeme und Webauftritte</strong> die deinen Betrieb
+                messbar weiterbringen – keine Agentur, kein Overhead, keine Standardlösungen.
+                In weniger als 10 Tagen live.
+            </p>
+
+            <div class="hero-ctas">
+                <a href="mailto:mktrades004@gmail.com" class="btn-hud btn-hud-primary" data-magnetic>
+                    Kontakt aufnehmen
+                </a>
+                <a href="#services" class="btn-hud btn-hud-ghost">
+                    Services ansehen
+                </a>
+                <a href="portfolio.html" class="btn-hud btn-hud-ghost">
+                    Portfolio
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- GLYPH DIVIDER -->
+    <div class="glyph-divider" aria-hidden="true">◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈</div>
+
+    <!-- 01 · ÜBER MICH -->
+    <section id="about" class="np-section">
+        <div class="container">
+            <div class="section-hud-label" data-reveal>01 · ÜBER MICH</div>
+            <div class="about-grid">
+                <div class="hud-card about-text" data-reveal>
+                    <p>
+                        21 Jahre, aus Northeim. Ich baue <strong>KI-Automatisierungen, Chatbots und Websites</strong> – für Unternehmen die aufgehört haben, jede Aufgabe manuell zu erledigen.
+                    </p>
+                    <p>
+                        Mein Ansatz ist direkt: Erst verstehen, was wirklich der Engpass ist. Dann das einfachste System bauen, das ihn löst. Kein Baukasten, kein Template, kein Overhead.
+                    </p>
+                    <p>
+                        Jedes Projekt ist eine Zusammenarbeit – du siehst jeden Schritt, entscheidest an jedem Punkt. Vom ersten Gespräch bis zum Go-Live: <strong>weniger als 10 Tage</strong>.
+                    </p>
+                    <div class="about-status">VERFÜGBAR FÜR NEUE PROJEKTE</div>
                 </div>
-
-                <h1 class="hero-headline">
-                    Systeme die<br>
-                    <span class="hi">arbeiten.</span><br>
-                    Du auch.
-                </h1>
-
-                <p class="hero-sub">
-                    Websites, KI-Chatbots und Workflow-Automatisierungen –
-                    gebaut für messbare Ergebnisse. Kein Baukasten, kein Generisches.
-                </p>
-
-                <div class="hero-actions">
-                    <a href="services.html" class="btn btn-primary" data-magnetic>Services ansehen &rarr;</a>
-                    <a href="mailto:mktrades004@gmail.com" class="btn btn-ghost">Direkt schreiben</a>
-                </div>
-
-                <div class="hero-stats">
-                    <div>
-                        <div class="hero-stat-value">3+</div>
-                        <div class="hero-stat-label">Spezialisierte Services</div>
+                <div class="about-side" data-reveal>
+                    <div class="stat-chip">
+                        <div class="stat-chip-value">&lt; 10</div>
+                        <div class="stat-chip-label">TAGE BIS GO-LIVE</div>
                     </div>
-                    <div>
-                        <div class="hero-stat-value">&lt;10</div>
-                        <div class="hero-stat-label">Tage bis Go-Live</div>
+                    <div class="stat-chip">
+                        <div class="stat-chip-value">100%</div>
+                        <div class="stat-chip-label">INDIVIDUELL ENTWICKELT</div>
                     </div>
-                    <div>
-                        <div class="hero-stat-value">100%</div>
-                        <div class="hero-stat-label">Individuell entwickelt</div>
+                    <div class="stat-chip">
+                        <div class="stat-chip-value">3+</div>
+                        <div class="stat-chip-label">SPEZIALISIERTE SERVICES</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Services -->
-    <section id="services" class="services">
+    <!-- GLYPH DIVIDER -->
+    <div class="glyph-divider" aria-hidden="true">◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈</div>
+
+    <!-- 02 · SERVICES -->
+    <section id="services" class="np-section">
         <div class="container">
-            <div class="services-header" data-reveal>
-                <p class="section-label">Was ich baue</p>
-                <h2 class="section-title">Drei Services.<br>Ein Ziel.</h2>
-                <p class="section-sub">Jede Lösung ist auf deinen spezifischen Engpass zugeschnitten – nicht auf ein Template.</p>
-            </div>
+            <div class="section-hud-label" style="--hud-color: var(--magenta)" data-reveal>02 · SERVICES</div>
+            <h2 class="np-section-title" data-reveal>Was ich baue.</h2>
+            <div class="np-service-grid">
 
-            <div class="service-grid">
-                <div class="service-card" data-reveal-batch>
-                    <div class="service-icon">
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <rect x="2" y="3" width="20" height="14" rx="2"/>
-                            <path d="M8 21h8M12 17v4"/>
-                        </svg>
-                    </div>
+                <div class="np-service-card" data-reveal-batch>
+                    <div class="service-num">SERVICE · 01</div>
                     <h3>Website-Erstellung</h3>
-                    <p>Konvertierungsstarke Websites die dein Angebot klar kommunizieren. Mobil-optimiert, schnell, verkaufsbereit.</p>
-                    <a href="services.html" class="service-link">Details &amp; Preise &rarr;</a>
+                    <p>Konvertierungsstarke Websites die dein Angebot klar kommunizieren. Mobil-optimiert, schnell, individuell – kein Template.</p>
+                    <div class="np-service-price">AB 499 € · EINMALIG</div>
+                    <a href="services.html" class="service-link-hud">Details &amp; Umfang →</a>
                 </div>
 
-                <div class="service-card" data-reveal-batch>
-                    <div class="service-icon">
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                        </svg>
-                    </div>
+                <div class="np-service-card" data-reveal-batch>
+                    <div class="service-num">SERVICE · 02</div>
                     <h3>KI ChatBot</h3>
-                    <p>Dein Unternehmen antwortet 24/7. Der Bot kennt dein Angebot, qualifiziert Leads und spart bares Geld.</p>
-                    <a href="services.html" class="service-link">Details &amp; Preise &rarr;</a>
+                    <p>Dein Unternehmen antwortet 24/7. Der Bot kennt dein Angebot, qualifiziert Leads und hält sie warm – auf Autopilot.</p>
+                    <div class="np-service-price">AB 799 € SETUP · OPT. 99 €/MON</div>
+                    <a href="services.html" class="service-link-hud">Details &amp; Umfang →</a>
                 </div>
 
-                <div class="service-card" data-reveal-batch>
-                    <div class="service-icon">
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-                        </svg>
-                    </div>
+                <div class="np-service-card" data-reveal-batch>
+                    <div class="service-num">SERVICE · 03</div>
                     <h3>Automatisierungen</h3>
                     <p>Repetitive Workflows automatisiert. Leads, E-Mails, Daten – einmal einrichten, dauerhaft Zeit sparen.</p>
-                    <a href="services.html" class="service-link">Details &amp; Preise &rarr;</a>
+                    <div class="np-service-price">AB 349 € · PRO WORKFLOW</div>
+                    <a href="services.html" class="service-link-hud">Details &amp; Umfang →</a>
                 </div>
-            </div>
 
-            <div class="services-footer">
-                <a href="services.html" class="btn btn-ghost">Alle Services mit Preisen ansehen</a>
             </div>
         </div>
     </section>
 
-    <!-- Process -->
-    <section class="process">
+    <!-- 03 · ERGEBNISSE -->
+    <section id="results" class="np-section">
         <div class="container">
-            <div class="process-header" data-reveal>
-                <p class="section-label">So läuft es ab</p>
-                <h2 class="section-title">Drei Schritte.<br>Von Anfrage bis Live.</h2>
-            </div>
-            <div class="process-steps">
-                <div class="process-step" data-reveal-batch>
-                    <div class="step-num">01</div>
-                    <h3>Gespräch</h3>
-                    <p>15 Minuten reichen. Ich verstehe dein Problem, du bekommst eine ehrliche Einschätzung ohne Verkaufsdruck.</p>
+            <div class="section-hud-label" style="--hud-color: var(--amber)" data-reveal>03 · ERGEBNISSE</div>
+            <h2 class="np-section-title" data-reveal>Zahlen die sprechen.</h2>
+            <div class="np-results-grid">
+
+                <div class="np-result-card" data-reveal-batch>
+                    <div class="result-metric">+40%</div>
+                    <div class="result-what">MEHR RESERVIERUNGEN</div>
+                    <div class="result-desc">Pizzeria Pinocchio – Website-Neugestaltung mit mobilem Reservierungsformular und lokaler SEO-Optimierung.</div>
                 </div>
-                <div class="process-step" data-reveal-batch>
-                    <div class="step-num">02</div>
-                    <h3>Umsetzung</h3>
-                    <p>Ich entwickle, du gibst Feedback. Kein Black-Box-Prozess – du siehst jeden Schritt und entscheidest.</p>
+
+                <div class="np-result-card" data-reveal-batch>
+                    <div class="result-metric">80%</div>
+                    <div class="result-what">WENIGER SUPPORT-E-MAILS</div>
+                    <div class="result-desc">E-Commerce-Shop – KI-Chatbot beantwortet Fragen zu Bestellungen, Versand und Retouren rund um die Uhr.</div>
                 </div>
-                <div class="process-step" data-reveal-batch>
-                    <div class="step-num">03</div>
-                    <h3>Launch</h3>
-                    <p>Live-Schaltung, Übergabe, Support. In weniger als 10 Tagen vom ersten Call bis zum fertigen Ergebnis.</p>
+
+                <div class="np-result-card" data-reveal-batch>
+                    <div class="result-metric">3 h</div>
+                    <div class="result-what">EINGESPART PRO WOCHE</div>
+                    <div class="result-desc">Handwerksbetrieb – Leads automatisch ins CRM, Angebot generiert, Rückmeldung in unter 2 Minuten.</div>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <!-- CTA Band -->
-    <section id="contact" class="cta-band-section">
+    <!-- 04 · SKILLS & TOOLS -->
+    <section id="skills" class="np-section">
         <div class="container">
-            <div class="cta-band-inner" data-reveal>
-                <p class="section-label">Kontakt</p>
-                <h2>Bereit anzufangen?</h2>
-                <p>Schreib kurz was du brauchst. Kein Formular, kein Funnel – direkt per E-Mail.</p>
-                <a href="mailto:mktrades004@gmail.com" class="btn btn-primary" data-magnetic>Projekt anfragen &rarr;</a>
+            <div class="section-hud-label" data-reveal>04 · SKILLS &amp; TOOLS</div>
+            <h2 class="np-section-title" data-reveal>Womit ich arbeite.</h2>
+
+            <div class="skills-block" data-reveal>
+                <div class="skills-category">KI &amp; AUTOMATISIERUNG</div>
+                <div class="skills-chips">
+                    <span class="skill-chip skill-chip-teal">Claude API</span>
+                    <span class="skill-chip skill-chip-teal">OpenAI</span>
+                    <span class="skill-chip skill-chip-teal">LangChain</span>
+                    <span class="skill-chip skill-chip-teal">n8n</span>
+                    <span class="skill-chip skill-chip-teal">Make</span>
+                    <span class="skill-chip skill-chip-teal">Zapier</span>
+                    <span class="skill-chip skill-chip-teal">Webhooks</span>
+                    <span class="skill-chip skill-chip-teal">RAG</span>
+                    <span class="skill-chip skill-chip-teal">Prompt Engineering</span>
+                </div>
+            </div>
+
+            <div class="skills-block" data-reveal>
+                <div class="skills-category">WEB &amp; DESIGN</div>
+                <div class="skills-chips">
+                    <span class="skill-chip skill-chip-amber">HTML / CSS / JS</span>
+                    <span class="skill-chip skill-chip-amber">GSAP</span>
+                    <span class="skill-chip skill-chip-amber">WordPress</span>
+                    <span class="skill-chip skill-chip-amber">Vercel</span>
+                    <span class="skill-chip skill-chip-amber">Responsive Design</span>
+                    <span class="skill-chip skill-chip-amber">SEO-Grundlagen</span>
+                </div>
+            </div>
+
+            <div class="skills-block" data-reveal>
+                <div class="skills-category">TOOLS &amp; INFRASTRUKTUR</div>
+                <div class="skills-chips">
+                    <span class="skill-chip skill-chip-magenta">Python</span>
+                    <span class="skill-chip skill-chip-magenta">Git / GitHub</span>
+                    <span class="skill-chip skill-chip-magenta">REST APIs</span>
+                    <span class="skill-chip skill-chip-magenta">Google Workspace</span>
+                    <span class="skill-chip skill-chip-magenta">Figma</span>
+                    <span class="skill-chip skill-chip-magenta">Shopify</span>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- GLYPH DIVIDER -->
+    <div class="glyph-divider" aria-hidden="true">◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈ ⬡ ◈</div>
+
+    <!-- 05 · KONTAKT -->
+    <section id="contact" class="np-section">
+        <div class="container">
+            <div class="section-hud-label" data-reveal>05 · KONTAKT</div>
+            <div class="np-contact-inner">
+                <h2 class="np-section-title" data-reveal>Bereit anzufangen?</h2>
+                <p data-reveal>
+                    Schreib mir kurz was du brauchst – dein größter Engpass, dein Projekt, deine Idee.
+                    Das Erstgespräch ist kostenlos, du gehst mit einem konkreten Plan raus.
+                    Kein Formular, kein Funnel.
+                </p>
+                <div data-reveal>
+                    <a href="mailto:mktrades004@gmail.com" class="btn-hud btn-hud-primary" data-magnetic>
+                        Projekt anfragen →
+                    </a>
+                </div>
+                <div class="contact-links" data-reveal>
+                    <a href="mailto:mktrades004@gmail.com" class="service-link-hud">mktrades004@gmail.com</a>
+                    <span style="color:rgba(255,255,255,.15)">·</span>
+                    <a href="services.html" class="service-link-hud">Alle Services</a>
+                    <span style="color:rgba(255,255,255,.15)">·</span>
+                    <a href="portfolio.html" class="service-link-hud">Portfolio</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2026 Milad KI.engineering. Alle Rechte vorbehalten.</p>
+            <p>&copy; 2026 Milad KI.engineering</p>
             <ul class="footer-links">
                 <li><a href="services.html">Services</a></li>
                 <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="landing.html">Landing Page</a></li>
             </ul>
         </div>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
-    <script src="script.js"></script>
+</div><!-- /np-wrap -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+<script src="script.js"></script>
+
+<script>
+/* ===== NEURAL MESH ===== */
+(function () {
+    const canvas = document.getElementById('neural-canvas');
+    const ctx = canvas.getContext('2d');
+    const NODE_COUNT = 110;
+    const CONNECT_DIST = 160;
+    let W, H, nodes = [], streaks = [], frame = 0;
+    const mouse = { x: -9999, y: -9999 };
+    let edgeCache = [];
+
+    function resize() {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        W = window.innerWidth; H = window.innerHeight;
+        canvas.width = W * dpr; canvas.height = H * dpr;
+        canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+        ctx.scale(dpr, dpr);
+    }
+
+    function initNodes() {
+        nodes = Array.from({ length: NODE_COUNT }, () => {
+            const bx = Math.random() * W, by = Math.random() * H;
+            return {
+                x: bx, y: by, bx, by,
+                vx: (Math.random() - .5) * .25,
+                vy: (Math.random() - .5) * .25,
+                phase: Math.random() * Math.PI * 2,
+                speed: .002 + Math.random() * .004,
+                glow: 0,
+            };
+        });
+    }
+
+    function buildEdges() {
+        edgeCache = [];
+        for (let i = 0; i < nodes.length; i++) {
+            for (let j = i + 1; j < nodes.length; j++) {
+                const dx = nodes[i].x - nodes[j].x;
+                const dy = nodes[i].y - nodes[j].y;
+                const d = Math.sqrt(dx * dx + dy * dy);
+                if (d < CONNECT_DIST) edgeCache.push({ i, j, d });
+            }
+        }
+    }
+
+    function spawnStreak() {
+        if (edgeCache.length === 0) return;
+        const edge = edgeCache[Math.floor(Math.random() * edgeCache.length)];
+        streaks.push({ from: edge.i, to: edge.j, t: 0, speed: .018 + Math.random() * .025 });
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, W, H);
+
+        // BG
+        const bg = ctx.createRadialGradient(W * .5, H * .4, 0, W * .5, H * .4, W * .85);
+        bg.addColorStop(0, 'hsl(260,55%,7%)');
+        bg.addColorStop(1, 'hsl(260,60%,3%)');
+        ctx.fillStyle = bg;
+        ctx.fillRect(0, 0, W, H);
+
+        // Update nodes
+        for (const n of nodes) {
+            n.phase += n.speed;
+            n.bx += n.vx; n.by += n.vy;
+            if (n.bx < 0 || n.bx > W) n.vx *= -1;
+            if (n.by < 0 || n.by > H) n.vy *= -1;
+            const drift = Math.sin(n.phase) * 18;
+            let tx = n.bx + Math.cos(n.phase * .7) * drift;
+            let ty = n.by + Math.sin(n.phase) * drift;
+            const mdx = tx - mouse.x, mdy = ty - mouse.y;
+            const md = Math.sqrt(mdx * mdx + mdy * mdy);
+            if (md < 140) { tx += (mdx / md) * (140 - md) * .35; ty += (mdy / md) * (140 - md) * .35; }
+            n.x += (tx - n.x) * .1;
+            n.y += (ty - n.y) * .1;
+            n.glow = Math.max(0, n.glow - .018);
+        }
+
+        // Rebuild edges every 4 frames for perf
+        if (frame % 4 === 0) buildEdges();
+
+        // Draw edges
+        for (const e of edgeCache) {
+            const alpha = (1 - e.d / CONNECT_DIST) * .07;
+            ctx.beginPath();
+            ctx.strokeStyle = `hsla(270,35%,55%,${alpha})`;
+            ctx.lineWidth = .8;
+            ctx.moveTo(nodes[e.i].x, nodes[e.i].y);
+            ctx.lineTo(nodes[e.j].x, nodes[e.j].y);
+            ctx.stroke();
+        }
+
+        // Streaks
+        frame++;
+        if (frame % 10 === 0) spawnStreak();
+        streaks = streaks.filter(s => s.t <= 1);
+        for (const s of streaks) {
+            s.t += s.speed;
+            const fn = nodes[s.from], tn = nodes[s.to];
+            const sx = fn.x + (tn.x - fn.x) * s.t;
+            const sy = fn.y + (tn.y - fn.y) * s.t;
+            const hue = 330 + (185 - 330) * s.t;
+            const gr = ctx.createRadialGradient(sx, sy, 0, sx, sy, 9);
+            gr.addColorStop(0, `hsla(${hue},100%,72%,.9)`);
+            gr.addColorStop(1, `hsla(${hue},100%,72%,0)`);
+            ctx.beginPath();
+            ctx.fillStyle = gr;
+            ctx.arc(sx, sy, 9, 0, Math.PI * 2);
+            ctx.fill();
+            if (s.t > .88) tn.glow = Math.min(1, tn.glow + .25);
+        }
+
+        // Nodes
+        for (const n of nodes) {
+            if (n.glow > .05) {
+                const halo = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 18);
+                halo.addColorStop(0, `hsla(172,100%,63%,${n.glow * .28})`);
+                halo.addColorStop(1, 'transparent');
+                ctx.beginPath(); ctx.fillStyle = halo;
+                ctx.arc(n.x, n.y, 18, 0, Math.PI * 2); ctx.fill();
+            }
+            ctx.beginPath();
+            ctx.fillStyle = n.glow > .1
+                ? `hsla(172,100%,68%,${.4 + n.glow * .6})`
+                : 'hsla(270,30%,65%,.35)';
+            ctx.arc(n.x, n.y, 1.5, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        // Mouse glow
+        if (mouse.x > -999) {
+            const mg = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 130);
+            mg.addColorStop(0, 'hsla(172,100%,63%,.045)');
+            mg.addColorStop(1, 'transparent');
+            ctx.fillStyle = mg;
+            ctx.fillRect(0, 0, W, H);
+        }
+
+        requestAnimationFrame(draw);
+    }
+
+    resize();
+    initNodes();
+    window.addEventListener('resize', () => { resize(); initNodes(); });
+    window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+    draw();
+})();
+
+/* ===== SCROLL SPINE ===== */
+(function () {
+    const fill = document.getElementById('spine-fill');
+    const dot  = document.getElementById('spine-dot');
+    if (!fill || !dot) return;
+    const ticks = document.querySelectorAll('.spine-tick');
+    const sections = ['home','about','services','results','skills','contact'];
+
+    function update() {
+        const max = document.body.scrollHeight - window.innerHeight;
+        const pct = Math.min(1, window.scrollY / max);
+        fill.style.height = (pct * 100) + '%';
+        dot.style.top = (pct * 100) + '%';
+        ticks.forEach((t, i) => {
+            const sec = document.getElementById(sections[i]);
+            if (!sec) return;
+            const rect = sec.getBoundingClientRect();
+            t.classList.toggle('active', rect.top <= window.innerHeight * .6);
+        });
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+})();
+
+/* ===== TYPING ANIMATION ===== */
+(function () {
+    const el = document.getElementById('typing-text');
+    if (!el) return;
+    const words = ['KI-Automatisierung', 'Website-Entwicklung', 'Workflow-Automation', 'ChatBot-Integration'];
+    let wi = 0, ci = 0, deleting = false;
+
+    function tick() {
+        const word = words[wi];
+        if (!deleting) {
+            el.textContent = word.slice(0, ++ci);
+            if (ci === word.length) { deleting = true; setTimeout(tick, 1600); return; }
+            setTimeout(tick, 70 + Math.random() * 40);
+        } else {
+            el.textContent = word.slice(0, --ci);
+            if (ci === 0) { deleting = false; wi = (wi + 1) % words.length; setTimeout(tick, 400); return; }
+            setTimeout(tick, 38);
+        }
+    }
+    setTimeout(tick, 800);
+})();
+</script>
+
 </body>
 </html>
